@@ -2,7 +2,6 @@ import kivy
 kivy.require('2.1.0')
 
 from kivy.app import App
-from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Rectangle
