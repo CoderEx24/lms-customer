@@ -63,7 +63,7 @@ class LoginPage(FloatLayout):
 
         # Labels
         # Welcome Label
-        self.welcomelabel = Label(text="[b]Welcome to E-Library![/b]\nKindly enter your credentials.",
+        self.welcomelabel = Label(text="[b]WELCOME TO EJUST E-LIBRARY[/b]\n Sign in to continue!",
                                 markup = True,
                                 halign='center',
                                 color=(0,0,0),
@@ -75,35 +75,33 @@ class LoginPage(FloatLayout):
         self.add_widget(self.welcomelabel)
         # Textboxes
         # Username Textbox
+        self.uicon = Image(source="assets/user-icon.png",
+                    size_hint = (.5,.5),
+                    pos_hint={"center_x": 0.6, "center_y": .57})
+        self.add_widget(self.uicon)
         self.userBox = TextInput(multiline=False,
-                    size_hint = (.23,.06),
-                    pos_hint = {"center_x": .85, "center_y": .57})
-        self.add_widget(Label(text="USERNAME:",
-                        font_size = 14,
-                        color = (0,0,0),
-                        outline_width = 2,
-                        outline_color = (1,1,1),
-                        pos_hint = {"center_x": .65, "center_y": .57}))
+                    size_hint = (.3,.06),
+                    hint_text = "Username",
+                    pos_hint = {"center_x": .81, "center_y": .57})
         self.add_widget(self.userBox)
         # Password Textbox
+        self.picon = Image(source="assets/password-lock-icon.png",
+                    size_hint = (1,1),
+                    pos_hint={"center_x": 0.6, "center_y": .47})
+        self.add_widget(self.picon)
         self.passBox = TextInput(multiline=False,
-                    size_hint = (.23,.06),
+                    size_hint = (.3,.06),
                     password = True,
-                    pos_hint = {"center_x": .85, "center_y": .47}) 
-        self.add_widget(Label(text="PASSWORD:",
-                        font_size = 14,
-                        color = (0,0,0),
-                        outline_width = 2,
-                        outline_color = (1,1,1),
-                        pos_hint = {"center_x": .65, "center_y": .47}))
+                    hint_text = "Password",
+                    pos_hint = {"center_x": .81, "center_y": .47}) 
         self.add_widget(self.passBox)
 
         # Buttons
         # Login Button
         self.loginbut = Button(text="LOGIN",color=(0,0,0),bold=True,outline_width=3,outline_color=(1,1,1),
-                                size_hint=(.18,.1),
+                                size_hint=(.2,.1),
                                 font_size=14,
-                                pos_hint={"center_x": .67, "center_y": .35},
+                                pos_hint={"center_x": .66, "center_y": .35},
                                 background_normal=
                                 "assets/login-ejust-buttontemplate.png",
                                 background_down=
@@ -113,8 +111,8 @@ class LoginPage(FloatLayout):
         # Register Button
         self.registerbut = Button(text="REGISTER",color=(0,0,0),bold=True,outline_width=3,outline_color=(1,1,1),
                                 font_size=14,
-                                size_hint=(.18,.1),
-                                pos_hint={"center_x": .87, "center_y": .35},
+                                size_hint=(.2,.1),
+                                pos_hint={"center_x": .88, "center_y": .35},
                                 background_normal=
                                 "assets/login-ejust-buttontemplate.png",
                                 background_down=
@@ -138,7 +136,8 @@ class LoginPage(FloatLayout):
 
 class MainApp(App): 
     def build(self):
-        self.title = config.projectitle
+        self.title = config.projecttitle
+        self.icon = "assets/ejust-project-icon.png"
         return LoginPage()  
 
 if __name__ == '__main__':
