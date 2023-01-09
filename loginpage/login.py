@@ -1,6 +1,5 @@
 import kivy
 kivy.require('2.1.0')
-
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
@@ -8,18 +7,19 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Rectangle
 from kivy.uix.image import Image
 from kivy.uix.button import Button
-import config
+from kivy.uix.screenmanager import Screen
 
 # Window Size
 from kivy.core.window import Window
 Window.size = (567, 558)
 generalcenter = (0.87+0.67)/2
+
 # Methods
 def _login_pressed(instance):
-    pass
+    App.get_running_app().screen_manager.current = "Customer"
     
 def _register_pressed(instance):
-    pass
+    App.get_running_app().screen_manager.current = "Register"
 
 def _fgtpwdbut_pressed(instance):
     instance.color=(0.5,0.73,1)
@@ -28,7 +28,7 @@ def _fgtpwdbut_released(instance):
     instance.color=(0.2,0.43,0.77)
 
 # Login Page
-class LoginPage(FloatLayout):
+class LoginPage(Screen, FloatLayout):
     def _update_bg(self, instance, value):
         self.bg.pos = instance.pos
         self.bg.size = instance.size
@@ -133,12 +133,3 @@ class LoginPage(FloatLayout):
         self.fgtpwdbut.bind(on_press=_fgtpwdbut_pressed)
         self.fgtpwdbut.bind(on_release=_fgtpwdbut_released)
         self.add_widget(self.fgtpwdbut)
-
-class MainApp(App): 
-    def build(self):
-        self.title = config.projecttitle
-        self.icon = "assets/ejust-project-icon.png"
-        return LoginPage()  
-
-if __name__ == '__main__':
-    MainApp().run()

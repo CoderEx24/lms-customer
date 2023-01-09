@@ -7,7 +7,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Rectangle
 from kivy.uix.image import Image
 from kivy.uix.button import Button
-import config
+from kivy.uix.screenmanager import Screen
 
 # Window Size
 from kivy.core.window import Window
@@ -16,13 +16,15 @@ generalcenter = 0.5
 
 # Methods
 def _register_pressed(instance):
-    pass
+    App.get_running_app().screen_manager.current = "Customer"
+
 def _cancel_pressed(instance):
+    App.get_running_app().screen_manager.current = "Login"
     pass
 
 # Register Page
 
-class RegisterPage(FloatLayout):
+class RegisterPage(Screen, FloatLayout):
     def _update_bg(self, instance, value):
         self.bg.pos = instance.pos
         self.bg.size = instance.size
@@ -134,12 +136,3 @@ class RegisterPage(FloatLayout):
                                 "assets/login-ejust-buttontemplate-down.png")
         self.cancelbut.bind(on_press=_cancel_pressed)
         self.add_widget(self.cancelbut)
-
-class MainApp(App): 
-    def build(self):
-        self.title = config.projecttitle
-        self.icon = "assets/ejust-project-icon.png"
-        return RegisterPage()  
-
-if __name__ == '__main__':
-    MainApp().run()

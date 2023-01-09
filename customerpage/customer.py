@@ -13,7 +13,7 @@ from kivy.graphics import Rectangle
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.behaviors import ToggleButtonBehavior
-import config
+from kivy.uix.screenmanager import Screen
 
 # Window Size
 from kivy.core.window import Window
@@ -28,7 +28,6 @@ Window.bind(on_resize = reSize)
 
 # Methods
 def _rent_pressed(instance):
-    pass
     pass
 
 # Button Classes
@@ -78,6 +77,7 @@ class logoutButton(ButtonBehavior,FloatLayout, Image):
 
     def on_release(self):
         self.source = "assets/logout-icon.png"
+        App.get_running_app().screen_manager.current = "Login"
 
 # Wishlist Menu Button Class
 class wishlistMenuButton(ButtonBehavior,FloatLayout, Image):
@@ -187,8 +187,9 @@ class ItemsGrid(ScrollView, FloatLayout):
         grid.add_widget(Image(source="assets/login-ejust-buttonempty.png"))
         grid.add_widget(Image(source="assets/login-ejust-buttonempty.png"))
 
-        for book in Books:
-            grid.add_widget(Book(book))
+        for i in range(5):
+            for book in Books:
+                grid.add_widget(Book(book))
         
         self.size_hint=(0.7,None)
         self.size=(Window.width, Window.height-110)
@@ -221,7 +222,7 @@ class CategoriesBox(ScrollView, FloatLayout):
         self.add_widget(box)
 
 # Customer Page
-class CustomerPage(FloatLayout):
+class CustomerPage(Screen, FloatLayout):
     def _update_bg(self, instance, value):
         self.bg.pos = instance.pos
         self.bg.size = instance.size
@@ -305,12 +306,3 @@ class CustomerPage(FloatLayout):
         self.logoutbut.size_hint = (.07,.07)
         self.logoutbut.pos_hint = {"center_x": 0.194, "center_y": .135}
         self.add_widget(self.logoutbut)
-
-class MainApp(App): 
-    def build(self):
-        self.title = config.projecttitle
-        self.icon = "assets/ejust-project-icon.png"
-        return CustomerPage()
-
-if __name__ == '__main__':
-    MainApp().run()
